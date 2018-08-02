@@ -24,7 +24,7 @@ class DbProcessor
   end
 
   def rm_from_db
-
+    
   end
 
   private

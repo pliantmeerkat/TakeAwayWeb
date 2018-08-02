@@ -1,9 +1,19 @@
+<head>
+<title="Shopping-plus">
+</head>
+<body>
 <h1 align="center">Menu</h1>
+</h1>
 <ul>
  <div class="menu">
  <h2>
 <% @items.each do |item| %>
-  <li><%= item[:name] %>> : £<%= item[:price] %></li>
+  <li><%= item[:name] %> : £<%= (item[:price].to_f/100.00).round(2) %></li> 
   <% end %>
+</h2>
+</div>
 </ul>
-  </h2
+<div class="Basket">
+Basket:
+</div>
+</body>
