@@ -28,6 +28,20 @@ class App < Sinatra::Base
     redirect('/menu')
   end
 
+  post '/remove' do
+    @order.rm_item_from_list(name: params.values.join, price: params.keys.join.to_i)
+    redirect('/menu')
+  end
+
+  post '/order_place' do
+    redirect('/order')
+  end
+
+  get '/order' do
+    @processed_order = @order.item_list
+    erb(:order)
+  end
+
   run! if app_file == $PROGRAM_NAME
 
 end

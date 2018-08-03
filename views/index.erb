@@ -2,6 +2,28 @@
 <title="Shopping-plus">
 </head>
 <style>
+
+  body {
+ background: #00F260; 
+background: -webkit-linear-gradient(to left, #0575E6, #00F260); 
+background: linear-gradient(to left, #0575E6, #00F260);
+}
+   .Basket {
+  position: relative;
+  display: flex;
+  margin-left: 70%;
+  
+}
+.order {
+  padding: 5%;
+  color: white;
+  background-color: green;
+  font-size: 80%;
+}
+.order_info {
+  position: relative;
+  margin-right: 25%;
+}
  .AddItem {
   margin-left: 3%;
   margin-right: 3%;
@@ -20,6 +42,7 @@
   color: green;
   background-color: red;
 }
+
 </style
 <body>
 <h1 align="center">Menu</h1>
@@ -37,14 +60,18 @@
 </div>
  </form>
 </ul>
-<div class="Basket">
 Basket: £<%=('%.2f' % (@order.total_charge.to_f/100.00).round(2)).to_s%>
  <h2>
+ <div class="order_info">
+ <form action="/order_place"method="post">
 <% @order.item_list.each do |item| %>
   <li><%= item[:name] %> : £<%= '%.2f' % ((item[:price].to_f/100.00).round(2)).to_s %>
-  <button class="RMItem"value="<%= item[:name] %>"name=<%= [item[:price]] %>> - </button>
+  <button formaction="/remove"class="RMItem"id="Rm"value="<%= item[:name] %>"name=<%= [item[:price]] %>> - </button>
   </li> 
   <% end %>
+  <button formaction="/order_place"value="Checkout"class="order"> Place Order </button>
+  </div>
+</form>
 </h2>
 </div>
 </body>
