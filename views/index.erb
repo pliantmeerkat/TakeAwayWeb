@@ -1,19 +1,50 @@
 <head>
 <title="Shopping-plus">
 </head>
+<style>
+ .AddItem {
+  margin-left: 3%;
+  margin-right: 3%;
+  position: relative;
+  width: 2%;
+  padding: 0.3%;
+  color: red;
+  background-color: green;
+}
+ .RMItem {
+  margin-left: 3%;
+  margin-right: 3%;
+  position: relative;
+  width: 2%;
+  padding: 0.3%;
+  color: green;
+  background-color: red;
+}
+</style
 <body>
 <h1 align="center">Menu</h1>
 </h1>
 <ul>
+  <form action="/add"method="post">
  <div class="menu">
  <h2>
 <% @items.each do |item| %>
-  <li><%= item[:name] %> : £<%= (item[:price].to_f/100.00).round(2) %></li> 
+  <li><%= item[:name] %> : £<%= '%.2f' % ((item[:price].to_f/100.00).round(2)).to_s %>
+    <button class="AddItem"value="<%= item[:name] %>"name=<%= [item[:price]] %>> + </button>
+  </li> 
   <% end %>
 </h2>
 </div>
+ </form>
 </ul>
 <div class="Basket">
-Basket:
+Basket: £<%=('%.2f' % (@order.total_charge.to_f/100.00).round(2)).to_s%>
+ <h2>
+<% @order.item_list.each do |item| %>
+  <li><%= item[:name] %> : £<%= '%.2f' % ((item[:price].to_f/100.00).round(2)).to_s %>
+  <button class="RMItem"value="<%= item[:name] %>"name=<%= [item[:price]] %>> - </button>
+  </li> 
+  <% end %>
+</h2>
 </div>
 </body>

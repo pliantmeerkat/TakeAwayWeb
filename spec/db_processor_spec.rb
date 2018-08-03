@@ -1,7 +1,7 @@
 require './model/db_processor'
 require 'spec_variables'
 describe DbProcessor do
-  let(:subject) { described_class.new('TakeAwayWeb_test') }
+  let(:subject) { described_class.new }
   context 'Reading methods' do
     describe '#read_from_db' do
       before(:each) { add_menu_to_test_db }
@@ -21,7 +21,14 @@ describe DbProcessor do
       end
     end
     describe '#connection' do
+      after(:each) { ENV['ENVIRONMENT'] = 'test' }
       it { expect(subject).to respond_to(:connector) }
+      it 'can connect to non test database when env != test' do
+        ENV['ENVIRONMENT'] = 'dev'
+        expect(
+          subject.connector.exec('SELECT * FROM current_catalog').map { |item| item['current_catalog']}.join
+        ).to eq('TakeAwayWeb')
+        end
     end
   end
   context 'Subtraction related methods' do

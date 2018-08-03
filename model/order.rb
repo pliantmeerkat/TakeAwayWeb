@@ -3,6 +3,14 @@ class Order
 
   attr_reader :item_list, :total_charge
 
+  def self.instance
+    @order
+  end
+
+  def self.create
+    @order = Order.new
+  end
+
   def initialize
     @item_list = []
     @total_charge = 0

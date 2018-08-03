@@ -44,4 +44,13 @@ describe Order do
       end
     end
   end
+  context 'Feature 4: class methods' do
+    describe '#.create' do
+      it { expect(Order).to respond_to(:create) }
+      it { expect(Order.create).to be_an(Order) }
+    end
+    describe '#.instance' do
+      it { expect(Order).to respond_to(:instance) }
+    end
+  end
 end

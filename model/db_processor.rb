@@ -3,8 +3,12 @@ class DbProcessor
 
   attr_reader :connector
 
-  def initialize(db_name)
-    @connector = PG.connect(dbname: db_name)
+  def initialize
+    if ENV['ENVIRONMENT'] == 'test'
+      @connector = PG.connect(dbname: 'TakeAwayWeb_test')
+    else
+      @connector = PG.connect(dbname: 'TakeAwayWeb')
+    end
   end
 
   def read_from_db(query='*')

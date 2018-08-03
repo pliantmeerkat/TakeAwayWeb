@@ -4,7 +4,7 @@ feature 'Feature 1: List of dishes with prices' do
     visit('/')
     menu_1.each do |item|
       expect(page).to have_content(item[:name])
-      expect(page).to have_content(item[:price])
+      expect(page).to have_content('%.2f' % (item[:price].to_f / 100.00).to_s)
     end
   end
 end
