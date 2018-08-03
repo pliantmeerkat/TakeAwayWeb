@@ -1,0 +1,20 @@
+<head>
+<title>TakeApp></title>
+</head>
+<style>
+
+</style>
+<body>
+<div class="Thanks">
+  <h1>Thank you for your order!</h1>
+ <div class="order">
+    <h1> Total: £<%=('%.2f' % (@order.total_charge.to_f/100.00).round(2)).to_s %></h1>
+    <h2> You ordered </h2>
+    <h2><% @order.item_list.each do |item| %>
+  <li><%= item[:name] %></h2>
+  <% end %>
+ </div>
+ <form action="/">
+ <input type="submit"value="Back">
+ </form>
+</body>
