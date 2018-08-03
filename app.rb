@@ -23,6 +23,15 @@ class App < Sinatra::Base
     erb(:index)
   end
 
+  get '/order' do
+    @processed_order = @order.item_list
+    erb(:order)
+  end
+
+  get '/menu-maker' do
+    erb(:menu_maker)
+  end
+
   post '/add' do
     @order.add_item_to_list(name: params.values.join, price: params.keys.join.to_i)
     redirect('/menu')
@@ -35,11 +44,6 @@ class App < Sinatra::Base
 
   post '/order_place' do
     redirect('/order')
-  end
-
-  get '/order' do
-    @processed_order = @order.item_list
-    erb(:order)
   end
 
   run! if app_file == $PROGRAM_NAME

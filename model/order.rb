@@ -18,12 +18,17 @@ class Order
 
   def add_item_to_list(item)
     @item_list << item
-    @total_charge += item[:price]
+    amend_total
   end
 
   def rm_item_from_list(item)
     raise 'Not in list' if @item_list.count(item).zero?
     @item_list.delete(item)
-    @total_charge -= item[:price]
+    amend_total
+  end
+
+  def amend_total
+    @total_charge = 0
+    item_list.each { |i| @total_charge += (i[:price]) }
   end
 end

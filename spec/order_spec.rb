@@ -34,13 +34,31 @@ describe Order do
     describe '#total_charge' do
       it { expect(subject).to respond_to(:total_charge) }
       it { expect(subject.total_charge).to eq(0) }
-    end
-    describe 'Adding/ Subtracting from total' do
-      before(:each) { 2.times { |_| subject.add_item_to_list(item1) } }
-      it { expect(subject.total_charge).to eq(2400) }
-      it 'amends total when item is removed' do
-        subject.rm_item_from_list(item1)
-        expect(subject.total_charge).to eq(1200)
+      describe '#amend_total' do
+        it { expect(subject).to respond_to(:amend_total) }
+        describe 'addition_tests' do
+          before(:each) { subject.add_item_to_list(item1) }
+          it { expect(subject.total_charge).to eq(1200) }
+          it 'works when many items including a duplicate is added' do
+            subject.add_item_to_list(item1)
+            subject.add_item_to_list(item2)
+            expect(subject.total_charge).to eq(3900)
+          end
+        end
+        describe 'Subtraction tests' do
+          before(:each) do
+            subject.add_item_to_list(item2)
+            2.times { subject.add_item_to_list(item1) }
+          end
+          it 'Works when one item is removed' do
+            subject.rm_item_from_list(item2)
+            expect(subject.total_charge).to eq(2400)
+          end
+          it 'Works when diplicate items are removed' do
+            subject.rm_item_from_list(item1)
+            expect(subject.total_charge).to eq(1500)
+          end
+        end
       end
     end
   end
