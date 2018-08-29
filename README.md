@@ -28,9 +28,9 @@ This program simulates a food take away website: allowing for any created menu t
  ```
   CREATE_TABLE menu (
     Serial Primary Key,
-    item_name,
-    item_price,
-    item_quantity
+    item_name varchar(40).
+    item_price int4,
+    item_quantity int4
   );
  ```
 
